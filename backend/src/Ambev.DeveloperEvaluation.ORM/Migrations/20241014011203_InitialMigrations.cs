@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -21,7 +20,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     Phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Role = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    Role = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    UpdatedAt = table.Column<DateTime?>(type: "timestamp", nullable: true)
                 },
                 constraints: table =>
                 {
