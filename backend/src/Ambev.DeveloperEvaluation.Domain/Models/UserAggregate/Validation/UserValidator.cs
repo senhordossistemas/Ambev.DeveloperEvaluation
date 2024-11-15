@@ -1,8 +1,8 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.Domain.Enums;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Enums;
 using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Domain.Validation;
+namespace Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Validation;
 
 public class UserValidator : AbstractValidator<User>
 {

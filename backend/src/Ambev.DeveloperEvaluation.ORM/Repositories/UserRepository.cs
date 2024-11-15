@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;

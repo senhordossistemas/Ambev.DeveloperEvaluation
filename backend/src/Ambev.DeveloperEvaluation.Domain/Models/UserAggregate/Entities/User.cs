@@ -1,10 +1,10 @@
 using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
-using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.Validation;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Enums;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Validation;
 
-namespace Ambev.DeveloperEvaluation.Domain.Entities;
+namespace Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
 
 
 /// <summary>
