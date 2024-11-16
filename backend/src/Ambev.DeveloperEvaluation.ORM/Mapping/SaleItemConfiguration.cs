@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,6 +20,11 @@ public class SaleItemConfiguration : IEntityTypeConfiguration<SaleItem>
         builder.Property(s => s.TotalItemAmount).IsRequired().HasColumnType("decimal(18,2)");
         builder.Property(s => s.ProductId).IsRequired();
         builder.Property(s => s.SaleId).IsRequired();
+
+        builder.HasOne<Product>()
+            .WithMany()
+            .HasForeignKey(s => s.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(s => s.Sale)
             .WithMany(s => s.Items)

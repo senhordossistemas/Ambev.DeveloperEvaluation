@@ -15,13 +15,20 @@ public class Sale : BaseEntity
     private readonly List<SaleItem> _items = [];
     public IReadOnlyCollection<SaleItem> Items => _items;
 
-    public void CalculateTotalAmount()
+    public void Calculate()
     {
-        TotalAmount = _items.Sum(item => item.TotalItemAmount);
+        CalculateTotalAmount();
+        CalculateDiscount();
     }
 
-    public void Cancel()
+    private void CalculateTotalAmount()
+        => TotalAmount = _items.Sum(item => item.TotalItemAmount);
+
+    private void CalculateDiscount()
     {
-        IsCancelled = true;
+        foreach (var item in _items)
+            item.CalculateDiscount();
     }
+
+    public void Cancel() => IsCancelled = true;
 }

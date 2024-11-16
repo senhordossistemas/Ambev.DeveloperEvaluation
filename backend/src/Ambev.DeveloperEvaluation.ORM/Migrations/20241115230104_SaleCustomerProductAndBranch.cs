@@ -71,7 +71,25 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sales", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sales_Branchs_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branchs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Sales_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sales_SaleNumber",
+                table: "Sales",
+                column: "SaleNumber",
+                unique: true);
 
             migrationBuilder.CreateTable(
                 name: "SaleItems",
@@ -89,6 +107,12 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 {
                     table.PrimaryKey("PK_SaleItems", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_SaleItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_SaleItems_Sales_SaleId",
                         column: x => x.SaleId,
                         principalTable: "Sales",
@@ -97,28 +121,27 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_SaleItems_ProductId",
+                table: "SaleItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SaleItems_SaleId",
                 table: "SaleItems",
                 column: "SaleId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Branchs");
+            migrationBuilder.DropTable(name: "Branchs");
 
-            migrationBuilder.DropTable(
-                name: "Customers");
+            migrationBuilder.DropTable(name: "Customers");
 
-            migrationBuilder.DropTable(
-                name: "Products");
+            migrationBuilder.DropTable(name: "Products");
 
-            migrationBuilder.DropTable(
-                name: "SaleItems");
+            migrationBuilder.DropTable(name: "SaleItems");
 
-            migrationBuilder.DropTable(
-                name: "Sales");
+            migrationBuilder.DropTable(name: "Sales");
         }
     }
 }

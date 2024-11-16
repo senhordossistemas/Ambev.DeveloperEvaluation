@@ -17,9 +17,11 @@ public class CreateSaleCommandHandler(ISaleRepository saleRepository, IMapper ma
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var user = mapper.Map<Sale>(command);
+        var sale = mapper.Map<Sale>(command);
 
-        var createdSale = await saleRepository.CreateAsync(user, cancellationToken);
+        sale.Calculate();
+
+        var createdSale = await saleRepository.CreateAsync(sale, cancellationToken);
         var result = mapper.Map<CreateSaleResult>(createdSale);
         return result;
     }
