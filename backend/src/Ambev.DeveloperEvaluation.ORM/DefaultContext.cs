@@ -2,17 +2,22 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
+using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
 
 namespace Ambev.DeveloperEvaluation.ORM;
 
-public class DefaultContext : DbContext
+public class DefaultContext(DbContextOptions<DefaultContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
-
-    public DefaultContext(DbContextOptions<DefaultContext> options) : base(options)
-    {
-    }
+    public DbSet<Sale> Sales { get; set; }
+    public DbSet<SaleItem> SaleItems { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Branch> Branches { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -24,7 +29,7 @@ public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
 {
     public DefaultContext CreateDbContext(string[] args)
     {
-        IConfigurationRoot configuration = new ConfigurationBuilder()
+        var configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build();
@@ -34,7 +39,7 @@ public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
 
         builder.UseNpgsql(
                connectionString,
-               b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.WebApi")
+               b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
         );
 
         return new DefaultContext(builder.Options);
