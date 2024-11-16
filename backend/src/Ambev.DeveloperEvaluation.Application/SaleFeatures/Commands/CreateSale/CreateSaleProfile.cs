@@ -2,7 +2,7 @@
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 using AutoMapper;
 
-namespace Ambev.DeveloperEvaluation.Application.SaleAggregate;
+namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.CreateSale;
 
 public class CreateSaleProfile : Profile
 {

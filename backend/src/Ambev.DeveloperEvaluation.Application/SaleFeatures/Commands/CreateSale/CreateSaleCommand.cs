@@ -2,7 +2,7 @@
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Dtos;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.SaleAggregate;
+namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.CreateSale;
 
 public sealed record CreateSaleCommand(
     string SaleNumber,
