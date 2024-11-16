@@ -9,5 +9,7 @@ public class CreateCustomerProfile : Profile
     {
         CreateMap<CreateCustomerCommand, Customer>()
             .ReverseMap();
+        CreateMap<Customer, CreateCustomerResult>()
+            .ReverseMap();
     }
 }

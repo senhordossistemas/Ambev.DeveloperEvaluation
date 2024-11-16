@@ -22,7 +22,7 @@ public class Sale : BaseEntity
     }
 
     private void CalculateTotalAmount()
-        => TotalAmount = _items.Sum(item => item.TotalItemAmount);
+        => TotalAmount = _items.Sum(item => item.Quantity);
 
     private void CalculateDiscount()
     {

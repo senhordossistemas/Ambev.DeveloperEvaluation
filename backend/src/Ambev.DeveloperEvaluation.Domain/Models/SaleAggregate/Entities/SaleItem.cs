@@ -7,7 +7,7 @@ public class SaleItem : BaseEntity
     public int Quantity { get; private set; }
     public decimal UnitPrice { get; private set; }
     public decimal Discount { get; private set; }
-    public decimal TotalItemAmount { get; private set; }
+    public decimal Total { get; private set; }
 
     public Guid ProductId { get; private set; }
     public Guid SaleId { get; private set; }
@@ -22,6 +22,6 @@ public class SaleItem : BaseEntity
             _ => 0m
         };
 
-        TotalItemAmount = Quantity * UnitPrice * (1 - Discount);
+        Total = Quantity * UnitPrice * (1 - Discount);
     }
 }

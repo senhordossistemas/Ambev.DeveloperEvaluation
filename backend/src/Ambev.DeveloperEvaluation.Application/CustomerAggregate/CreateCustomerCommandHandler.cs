@@ -1,5 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Repositories;
-using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Repositories;
 using AutoMapper;
 using FluentValidation;
@@ -18,10 +17,10 @@ public class CreateCustomerCommandHandler(ICustomerRepository customerRepository
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var branch = mapper.Map<Customer>(command);
+        var customer = mapper.Map<Customer>(command);
 
-        var createdcustomer = await customerRepository.CreateAsync(branch, cancellationToken);
-        var result = mapper.Map<CreateCustomerResult>(createdcustomer);
+        var createdCustomer = await customerRepository.CreateAsync(customer, cancellationToken);
+        var result = mapper.Map<CreateCustomerResult>(createdCustomer);
         return result;
     }
 }

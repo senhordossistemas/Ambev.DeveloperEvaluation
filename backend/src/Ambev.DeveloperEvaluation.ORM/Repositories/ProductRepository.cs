@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
@@ -7,7 +7,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 /// <summary>
 /// Implementation of ICustomerRepository using Entity Framework Core
 /// </summary>
-public class CustomerRepository : ICustomerRepository
+public class ProductRepository : IProductRepository
 {
     private readonly DefaultContext _context;
 
@@ -15,48 +15,48 @@ public class CustomerRepository : ICustomerRepository
     /// Initializes a new instance of UserRepository
     /// </summary>
     /// <param name="context">The database context</param>
-    public CustomerRepository(DefaultContext context)
+    public ProductRepository(DefaultContext context)
     {
         _context = context;
     }
 
     /// <summary>
-    /// Creates a new Customer in the database
+    /// Creates a new Product in the database
     /// </summary>
-    /// <param name="customer">The user to create</param>
+    /// <param name="product">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created user</returns>
-    public async Task<Customer> CreateAsync(Customer customer, CancellationToken cancellationToken = default)
+    public async Task<Product> CreateAsync(Product product, CancellationToken cancellationToken = default)
     {
-        await _context.Customers.AddAsync(customer, cancellationToken);
+        await _context.Products.AddAsync(product, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
-        return customer;
+        return product;
     }
 
     /// <summary>
-    /// Retrieves a Customer by their unique identifier
+    /// Retrieves a Product by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The user if found, null otherwise</returns>
-    public async Task<Customer?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.Customers.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+        return await _context.Products.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 
     /// <summary>
-    /// Deletes a Customer from the database
+    /// Deletes a Product from the database
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>True if the user was deleted, false if not found</returns>
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var customer = await GetByIdAsync(id, cancellationToken);
-        if (customer == null)
+        var product = await GetByIdAsync(id, cancellationToken);
+        if (product == null)
             return false;
 
-        _context.Customers.Remove(customer);
+        _context.Products.Remove(product);
         await _context.SaveChangesAsync(cancellationToken);
         return true;
     }
