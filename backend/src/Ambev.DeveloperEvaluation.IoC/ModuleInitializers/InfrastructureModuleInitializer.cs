@@ -1,5 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Repositories;
+using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
 using Ambev.DeveloperEvaluation.ORM;
@@ -19,5 +20,6 @@ public class InfrastructureModuleInitializer : IModuleInitializer
         builder.Services.AddScoped<ISaleRepository, SaleRepository>();
         builder.Services.AddScoped<IBranchRepository, BranchRepository>();
         builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+        builder.Services.AddScoped<IProductRepository, ProductRepository>();
     }
 }

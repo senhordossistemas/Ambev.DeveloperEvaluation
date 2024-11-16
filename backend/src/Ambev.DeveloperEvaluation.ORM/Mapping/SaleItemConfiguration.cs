@@ -17,7 +17,7 @@ public class SaleItemConfiguration : IEntityTypeConfiguration<SaleItem>
         builder.Property(s => s.Quantity).IsRequired().HasMaxLength(20);
         builder.Property(s => s.UnitPrice).IsRequired().HasColumnType("decimal(18,2)");
         builder.Property(s => s.Discount).HasColumnType("decimal(18,2)");
-        builder.Property(s => s.TotalItemAmount).IsRequired().HasColumnType("decimal(18,2)");
+        builder.Property(s => s.Total).IsRequired().HasColumnName("TotalItemAmount").HasColumnType("decimal(18,2)");
         builder.Property(s => s.ProductId).IsRequired();
         builder.Property(s => s.SaleId).IsRequired();
 

@@ -6,7 +6,7 @@ public class CreateBranchRequestValidator : AbstractValidator<CreateBranchReques
 {
     public CreateBranchRequestValidator()
     {
-        RuleFor(sale => sale.Name).NotEmpty().NotNull().Length(3, 50);
-        RuleFor(sale => sale.Location).NotEmpty().NotNull().Length(3, 50);
+        RuleFor(branch => branch.Name).NotEmpty().NotNull().Length(3, 50);
+        RuleFor(branch => branch.Location).NotEmpty().NotNull().Length(3, 50);
     }
 }
