@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,8 +17,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Password).IsRequired().HasMaxLength(100);
         builder.Property(u => u.Email).IsRequired().HasMaxLength(100);
         builder.Property(u => u.Phone).HasMaxLength(20);
-        builder.Property(u => u.CreatedAt).IsRequired();
-        builder.Property(u => u.UpdatedAt);
+        builder.Property(u => u.CreatedAt).HasColumnType("timestamp with time zone")
+            .HasDefaultValueSql("CURRENT_TIMESTAMP").IsRequired();
+        builder.Property(u => u.UpdatedAt).HasColumnType("timestamp with time zone");
 
         builder.Property(u => u.Status)
             .HasConversion<string>()

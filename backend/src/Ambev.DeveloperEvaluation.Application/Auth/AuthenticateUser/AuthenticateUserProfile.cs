@@ -1,5 +1,5 @@
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
 using AutoMapper;
-using Ambev.DeveloperEvaluation.Domain.Entities;
 
 namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
 
