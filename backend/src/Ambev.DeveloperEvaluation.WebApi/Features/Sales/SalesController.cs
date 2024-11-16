@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.SaleAggregate;
+﻿using Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;

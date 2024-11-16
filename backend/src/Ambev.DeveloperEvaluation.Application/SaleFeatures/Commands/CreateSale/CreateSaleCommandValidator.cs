@@ -1,7 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Validation;
 using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.SaleAggregate;
+namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.CreateSale;
 
 public class CreateSaleCommandValidator : AbstractValidator<CreateSaleCommand>
 {

@@ -1,12 +1,13 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Events;
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.SaleAggregate;
+namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.CreateSale;
 
-public class CreateSaleCommandHandler(ISaleRepository saleRepository, IMapper mapper)
+public class CreateSaleCommandHandler(ISaleRepository saleRepository, IMapper mapper, IMediator mediator)
     : IRequestHandler<CreateSaleCommand, CreateSaleResult>
 {
     public async Task<CreateSaleResult> Handle(CreateSaleCommand command, CancellationToken cancellationToken)
@@ -23,6 +24,9 @@ public class CreateSaleCommandHandler(ISaleRepository saleRepository, IMapper ma
 
         var createdSale = await saleRepository.CreateAsync(sale, cancellationToken);
         var result = mapper.Map<CreateSaleResult>(createdSale);
+
+        await mediator.Publish(new SaleCreatedEvent(createdSale), cancellationToken);
+        
         return result;
     }
 }

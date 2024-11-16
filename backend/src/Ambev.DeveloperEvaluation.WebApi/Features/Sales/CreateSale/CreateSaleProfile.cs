@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.SaleAggregate;
+﻿using Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.CreateSale;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
