@@ -1,12 +1,30 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Abstractions.Messaging;
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Events;
+using Ambev.DeveloperEvaluation.MessageBroker.Messages;
+using MassTransit;
 
 namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Events;
 
-public class SaleCreatedEventHandler : IDomainEventHandler<SaleCreatedEvent>
+public class SaleCreatedEventHandler(IPublishEndpoint publishEndpoint) : IDomainEventHandler<SaleCreatedEvent>
 {
     public async Task Handle(SaleCreatedEvent notification, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await publishEndpoint.Publish<ISaleCreated>(new
+            {
+                Success = true,
+                notification.Sale
+            }, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            await publishEndpoint.Publish<ISaleCreated>(new
+            {
+                Success = false,
+                Message = $"{ex.Message}-{ex.InnerException?.Message}"
+            }, cancellationToken);
+            throw;
+        }
     }
 }
