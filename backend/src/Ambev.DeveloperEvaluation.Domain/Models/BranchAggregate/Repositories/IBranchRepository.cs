@@ -1,31 +1,30 @@
-using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Entities;
 
-namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
+namespace Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Repositories;
 
 /// <summary>
-/// Repository interface for Sale entity operations
+/// Repository interface for Branch entity operations
 /// </summary>
-public interface ISaleRepository
+public interface IBranchRepository
 {
     /// <summary>
-    /// Creates a new sale in the repository
+    /// Creates a new Branch in the repository
     /// </summary>
-    /// <param name="sale">The user to create</param>
+    /// <param name="branch">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created user</returns>
-    Task<Sale> CreateAsync(Sale sale, CancellationToken cancellationToken = default);
+    Task<Branch> CreateAsync(Branch branch, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Retrieves a sale by their unique identifier
+    /// Retrieves a Branch by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The user if found, null otherwise</returns>
-    Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<Branch?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Deletes a sale from the repository
+    /// Deletes a branch from the repository
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>
