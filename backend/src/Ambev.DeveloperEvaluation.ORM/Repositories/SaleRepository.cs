@@ -53,6 +53,16 @@ public class SaleRepository : ISaleRepository
             .FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 
+    public async Task<Sale[]?> GetAsync(CancellationToken cancellationToken = default)
+    {
+        var sales = await _context.Sales
+            .Include(sale => sale.Items)
+            .OrderBy(s => s.SaleNumber)
+            .ToArrayAsync(cancellationToken: cancellationToken);
+
+        return sales;
+    }
+
     /// <summary>
     /// Deletes a sale from the database
     /// </summary>

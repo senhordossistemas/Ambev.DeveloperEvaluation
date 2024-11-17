@@ -25,6 +25,8 @@ public interface ISaleRepository
     /// <returns>The user if found, null otherwise</returns>
     Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
+    Task<Sale[]?> GetAsync(CancellationToken cancellationToken = default);
+
     /// <summary>
     /// Deletes a sale from the repository
     /// </summary>

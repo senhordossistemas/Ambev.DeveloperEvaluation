@@ -6,16 +6,15 @@ using MassTransit;
 
 namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Events;
 
-public class SaleUpdatedEventHandler(IPublishEndpoint publishEndpoint) : IDomainEventHandler<SaleUpdatedEvent>
+public class ItemCancelledEventHandler(IPublishEndpoint publishEndpoint) : IDomainEventHandler<ItemCancelledEvent>
 {
-    public async Task Handle(SaleUpdatedEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(ItemCancelledEvent notification, CancellationToken cancellationToken)
     {
         try
         {
-            await publishEndpoint.Publish<ISaleUpdated>(new
+            await publishEndpoint.Publish<IItemCancelled>(new
             {
-                Success = true,
-                notification.Sale
+                notification.Item
             }, cancellationToken);
         }
         catch (Exception ex)
@@ -29,4 +28,3 @@ public class SaleUpdatedEventHandler(IPublishEndpoint publishEndpoint) : IDomain
         }
     }
 }
-

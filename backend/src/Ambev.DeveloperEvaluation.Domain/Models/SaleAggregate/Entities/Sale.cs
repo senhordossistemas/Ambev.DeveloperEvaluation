@@ -31,7 +31,26 @@ public class Sale : BaseEntity
             item.CalculateDiscount();
     }
 
-    public void Cancel() => IsCancelled = true;
+    public void Cancel()
+    {
+        if (IsCancelled)
+            throw new InvalidOperationException("Sale is already cancelled.");
+
+        IsCancelled = true;
+        UpdateTimestamp();
+    }
+
+    public void CancelItem(Guid itemId)
+    {
+        var item = _items.FirstOrDefault(i => i.Id == itemId);
+        if (item == null)
+            throw new KeyNotFoundException($"Item with ID {itemId} not found.");
+
+        _items.Remove(item);
+        UpdateTimestamp();
+        Calculate();
+    }
+
     
     public void UpdateSaleDetails(decimal totalAmount, bool isCancelled, Guid? customerId, Guid? branchId)
     {

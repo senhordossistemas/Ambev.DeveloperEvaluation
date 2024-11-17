@@ -15,3 +15,4 @@ public sealed record UpdateSaleCommand(
 {
     public UpdateSaleCommand() : this(default, string.Empty, 0, false, null, null, []) { }
 }
+

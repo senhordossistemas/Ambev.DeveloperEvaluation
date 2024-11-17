@@ -1,5 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Abstractions.Messaging;
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Events;
+using Ambev.DeveloperEvaluation.MessageBroker.Common;
 using Ambev.DeveloperEvaluation.MessageBroker.Messages;
 using MassTransit;
 
@@ -19,7 +20,7 @@ public class SaleCreatedEventHandler(IPublishEndpoint publishEndpoint) : IDomain
         }
         catch (Exception ex)
         {
-            await publishEndpoint.Publish<ISaleCreated>(new
+            await publishEndpoint.Publish<IResponse>(new
             {
                 Success = false,
                 Message = $"{ex.Message}-{ex.InnerException?.Message}"

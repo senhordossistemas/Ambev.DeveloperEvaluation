@@ -30,6 +30,16 @@ public static class DependencyInjectionConfig
                 j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
             });
 
+            x.AddConsumer<SaleUpdatedConsumer>(j =>
+            {
+                j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
+            });
+
+            x.AddConsumer<SaleDeletedConsumer>(j =>
+            {
+                j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
+            });
+
             x.UsingRabbitMq((context, cfg) =>
             {
                 var queueSettings = context.GetRequiredService<IOptions<QueueSettings>>().Value;
