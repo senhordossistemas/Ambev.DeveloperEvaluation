@@ -2,4 +2,4 @@
 
 namespace Ambev.DeveloperEvaluation.Application.CartFeatures.Commands.DeleteCart;
 
-public sealed record DeleteCartCommand(Guid Id) : IRequest<bool>;
+public sealed record DeleteCartItemCommand(Guid UserId, Guid ProductId) : IRequest<bool>;
