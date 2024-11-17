@@ -1,8 +1,8 @@
 ﻿namespace Ambev.DeveloperEvaluation.Domain.Models.CartAggregate.Dtos;
 
-public sealed record CartItemDto(Guid ProductId, int Quantity)
+public sealed record CartItemDto(Guid Id, Guid ProductId, int Quantity)
 {
-    public CartItemDto() : this(default, default)
+    public CartItemDto() : this(default, default, default)
     {
     }
 }

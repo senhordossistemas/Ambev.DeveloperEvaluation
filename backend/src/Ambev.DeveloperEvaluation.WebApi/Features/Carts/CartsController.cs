@@ -31,7 +31,7 @@ public class CartsController (IMediator mediator, IMapper mapper) : BaseControll
         });
     }
     
-    [HttpDelete("remove-item{userId:guid}/{productId:guid}")]
+    [HttpDelete("remove-item/{userId:guid}/{productId:guid}")]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete([FromRoute] Guid userId, Guid productId, CancellationToken cancellationToken)
@@ -45,7 +45,7 @@ public class CartsController (IMediator mediator, IMapper mapper) : BaseControll
         });
     }
     
-    [HttpGet("{userId:guid}")]
+    [HttpGet("get-by-userid/{userId:guid}")]
     [ProducesResponseType(typeof(ApiResponseWithData<GetCartResult>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetCartById([FromRoute] Guid userId, CancellationToken cancellationToken)
