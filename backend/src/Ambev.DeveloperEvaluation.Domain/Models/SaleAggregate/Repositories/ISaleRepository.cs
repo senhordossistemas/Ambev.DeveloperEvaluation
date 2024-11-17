@@ -1,5 +1,4 @@
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
 
 namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
 
@@ -15,6 +14,8 @@ public interface ISaleRepository
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created user</returns>
     Task<Sale> CreateAsync(Sale sale, CancellationToken cancellationToken = default);
+    
+    Task<Sale> UpdateAsync(Sale sale, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves a sale by their unique identifier

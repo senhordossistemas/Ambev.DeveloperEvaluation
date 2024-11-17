@@ -4,6 +4,18 @@ namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 
 public class SaleItem : BaseEntity
 {
+    protected SaleItem()
+    {
+        
+    }
+    public SaleItem(int quantity, decimal unitPrice, Guid productId, Guid saleId)
+    {
+        Quantity = quantity;
+        UnitPrice = unitPrice;
+        ProductId = productId;
+        SaleId = saleId;
+    }
+
     public int Quantity { get; private set; }
     public decimal UnitPrice { get; private set; }
     public decimal Discount { get; private set; }
@@ -11,7 +23,7 @@ public class SaleItem : BaseEntity
 
     public Guid ProductId { get; private set; }
     public Guid SaleId { get; private set; }
-    public Sale Sale { get; private set; }
+    public Sale? Sale { get; private set; }
 
     public void CalculateDiscount()
     {
