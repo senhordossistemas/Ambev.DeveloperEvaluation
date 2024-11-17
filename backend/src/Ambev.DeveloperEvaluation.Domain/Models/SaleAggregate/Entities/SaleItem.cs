@@ -6,10 +6,11 @@ public class SaleItem : BaseEntity
 {
     protected SaleItem()
     {
-        
     }
     public SaleItem(int quantity, decimal unitPrice, Guid productId, Guid saleId)
     {
+        ValidateQuantity(quantity);
+        
         Quantity = quantity;
         UnitPrice = unitPrice;
         ProductId = productId;
@@ -24,6 +25,13 @@ public class SaleItem : BaseEntity
     public Guid ProductId { get; private set; }
     public Guid SaleId { get; private set; }
     public Sale? Sale { get; private set; }
+
+    
+    private static void ValidateQuantity(int quantity)
+    {
+        if (quantity > 20)
+            throw new InvalidOperationException("Cannot sell more than 20 identical items.");
+    }
 
     public void CalculateDiscount()
     {

@@ -16,6 +16,23 @@ public class Sale : BaseEntity
     private readonly List<SaleItem> _items = [];
     public IReadOnlyCollection<SaleItem> Items => _items;
 
+    public void UpdateSaleDetails(decimal totalAmount, bool isCancelled, Guid? customerId, Guid? branchId)
+    {
+        TotalAmount = totalAmount;
+        IsCancelled = isCancelled;
+        CustomerId = customerId;
+        BranchId = branchId;
+    }
+
+    public void UpdateItems(IEnumerable<SaleItemDto> items)
+    {
+        _items.Clear();
+        _items.AddRange(items.Select(item => new SaleItem( item.Quantity, item.UnitPrice, item.ProductId, Id)));
+        
+        Calculate();
+        UpdateTimestamp();
+    }
+    
     public void Calculate()
     {
         CalculateTotalAmount();
@@ -49,24 +66,6 @@ public class Sale : BaseEntity
         _items.Remove(item);
         UpdateTimestamp();
         Calculate();
-    }
-
-    
-    public void UpdateSaleDetails(decimal totalAmount, bool isCancelled, Guid? customerId, Guid? branchId)
-    {
-        TotalAmount = totalAmount;
-        IsCancelled = isCancelled;
-        CustomerId = customerId;
-        BranchId = branchId;
-    }
-
-    public void UpdateItems(IEnumerable<SaleItemDto> items)
-    {
-        _items.Clear();
-        _items.AddRange(items.Select(item => new SaleItem( item.Quantity, item.UnitPrice, item.ProductId, Id)));
-        
-        Calculate();
-        UpdateTimestamp();
     }
 
     public void UpdateTimestamp() => UpdatedAt = DateTime.UtcNow;
