@@ -73,4 +73,9 @@ public class Sale : BaseEntity
     {
         UpdatedAt = DateTime.UtcNow;
     }
+
+    public void AddItem(SaleItem item)
+    {
+        _items.Add(item);
+    }
 }
