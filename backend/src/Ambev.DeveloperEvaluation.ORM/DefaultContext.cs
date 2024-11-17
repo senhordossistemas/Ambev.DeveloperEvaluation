@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.CartAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
@@ -18,6 +19,7 @@ public class DefaultContext(DbContextOptions<DefaultContext> options) : DbContex
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Branch> Branches { get; set; }
+    public DbSet<Cart> Carts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -16,8 +16,8 @@ public class DeleteSaleCommandHandler(ISaleRepository saleRepository, IMediator 
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var sale = await saleRepository.GetByIdAsync(command.Id, cancellationToken);
-        if (sale == null) throw new Exception($"Sale with Id {command.Id} not found.");
+        var sale = await saleRepository.GetByIdAsync(command.Id, cancellationToken)
+                   ?? throw new Exception($"Sale with Id {command.Id} not found.");
 
         var deletedSale = await saleRepository.DeleteAsync(sale.Id, cancellationToken);
         if (!deletedSale) throw new Exception($"Sale with Id {command.Id} not deleted.");

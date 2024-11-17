@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.ProductAggregate;
+﻿using Ambev.DeveloperEvaluation.Application.ProductFeatures;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;

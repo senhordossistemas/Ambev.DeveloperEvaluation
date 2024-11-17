@@ -1,5 +1,4 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Common;
-using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Dtos;
 
 namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 
@@ -23,11 +22,20 @@ public class Sale : BaseEntity
         BranchId = branchId;
     }
 
-    public void UpdateItems(IEnumerable<SaleItemDto> items)
+    public void UpdateItems(SaleItem[] items)
     {
-        _items.Clear();
-        _items.AddRange(items.Select(item => new SaleItem(item.Quantity, item.UnitPrice, item.ProductId, Id)));
-
+        _items.RemoveAll(x => items.All(itemScreen => itemScreen.ProductId != x.ProductId));
+        
+        foreach (var itemScreen in items)
+        {
+            var existingItem = _items.Find(item => item.ProductId == itemScreen.ProductId);
+            
+            if (existingItem is not null)
+                existingItem.Update(itemScreen);
+            else
+                _items.Add(itemScreen);
+        }
+        
         Calculate();
         UpdateTimestamp();
     }

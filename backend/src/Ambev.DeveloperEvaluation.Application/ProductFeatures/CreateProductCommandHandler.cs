@@ -4,7 +4,7 @@ using AutoMapper;
 using FluentValidation;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.ProductAggregate;
+namespace Ambev.DeveloperEvaluation.Application.ProductFeatures;
 
 public class CreateProductCommandHandler(IProductRepository productRepository, IMapper mapper)
     : IRequestHandler<CreateProductCommand, CreateProductResult>

@@ -4,7 +4,7 @@ using AutoMapper;
 using FluentValidation;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.CustomerAggregate;
+namespace Ambev.DeveloperEvaluation.Application.CustomerFeatures;
 
 public class CreateCustomerCommandHandler(ICustomerRepository customerRepository, IMapper mapper)
     : IRequestHandler<CreateCustomerCommand, CreateCustomerResult>

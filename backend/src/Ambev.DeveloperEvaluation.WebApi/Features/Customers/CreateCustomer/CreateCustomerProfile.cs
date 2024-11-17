@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.CustomerAggregate;
+﻿using Ambev.DeveloperEvaluation.Application.CustomerFeatures;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Customers.CreateCustomer;

@@ -1,7 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
 using AutoMapper;
 
-namespace Ambev.DeveloperEvaluation.Application.CustomerAggregate;
+namespace Ambev.DeveloperEvaluation.Application.CustomerFeatures;
 
 public class CreateCustomerProfile : Profile
 {

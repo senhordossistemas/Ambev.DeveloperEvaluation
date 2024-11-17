@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.BranchAggregate;
+﻿using Ambev.DeveloperEvaluation.Application.BranchFeatures;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Branchs.CreateBranch;

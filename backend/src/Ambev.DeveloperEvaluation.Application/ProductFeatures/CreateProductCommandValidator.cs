@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.ProductAggregate;
+namespace Ambev.DeveloperEvaluation.Application.ProductFeatures;
 
 public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {

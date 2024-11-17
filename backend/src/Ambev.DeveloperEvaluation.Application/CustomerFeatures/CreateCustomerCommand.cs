@@ -1,15 +1,15 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.BranchAggregate;
+namespace Ambev.DeveloperEvaluation.Application.CustomerFeatures;
 
-public sealed record CreateBranchCommand(
+public sealed record CreateCustomerCommand(
     string Name,
-    string Location) : IRequest<CreateBranchResult>
+    string ExternalId) : IRequest<CreateCustomerResult>
 {
     public ValidationResultDetail Validate()
     {
-        var validator = new CreateBranchCommandValidator();
+        var validator = new CreateCustomerCommandValidator();
         var result = validator.Validate(this);
         return new ValidationResultDetail
         {

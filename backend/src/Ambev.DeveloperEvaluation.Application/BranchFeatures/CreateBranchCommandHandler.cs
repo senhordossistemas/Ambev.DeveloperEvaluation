@@ -4,7 +4,7 @@ using AutoMapper;
 using FluentValidation;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.BranchAggregate;
+namespace Ambev.DeveloperEvaluation.Application.BranchFeatures;
 
 public class CreateBranchCommandHandler(IBranchRepository branchRepository, IMapper mapper)
     : IRequestHandler<CreateBranchCommand, CreateBranchResult>

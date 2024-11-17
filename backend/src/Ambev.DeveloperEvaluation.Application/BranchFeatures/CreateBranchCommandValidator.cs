@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.BranchAggregate;
+namespace Ambev.DeveloperEvaluation.Application.BranchFeatures;
 
 public class CreateBranchCommandValidator : AbstractValidator<CreateBranchCommand>
 {

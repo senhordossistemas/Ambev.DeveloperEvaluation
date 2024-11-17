@@ -1,7 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.ProductAggregate;
+namespace Ambev.DeveloperEvaluation.Application.ProductFeatures;
 
 public sealed record CreateProductCommand(
     string Name,

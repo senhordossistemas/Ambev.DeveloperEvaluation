@@ -1,7 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Entities;
 using AutoMapper;
 
-namespace Ambev.DeveloperEvaluation.Application.ProductAggregate;
+namespace Ambev.DeveloperEvaluation.Application.ProductFeatures;
 
 public class CreateProductProfile : Profile
 {

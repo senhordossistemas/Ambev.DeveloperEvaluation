@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.CustomerAggregate;
+namespace Ambev.DeveloperEvaluation.Application.CustomerFeatures;
 
 public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
 {

@@ -18,15 +18,14 @@ public class SaleItem : BaseEntity
         SaleId = saleId;
     }
 
-    public int Quantity { get; }
-    public decimal UnitPrice { get; }
+    public int Quantity { get; private set; }
+    public decimal UnitPrice { get; private set; }
     public decimal Discount { get; private set; }
     public decimal Total { get; private set; }
 
     public Guid ProductId { get; private set; }
     public Guid SaleId { get; private set; }
     public Sale? Sale { get; }
-
 
     private static void ValidateQuantity(int quantity)
     {
@@ -44,5 +43,14 @@ public class SaleItem : BaseEntity
         };
 
         Total = Quantity * UnitPrice * (1 - Discount);
+    }
+
+    public void Update(SaleItem itemScreen)
+    {
+        ValidateQuantity(itemScreen.Quantity);
+
+        Quantity = itemScreen.Quantity;
+        UnitPrice = itemScreen.UnitPrice;
+        ProductId = itemScreen.ProductId;
     }
 }
