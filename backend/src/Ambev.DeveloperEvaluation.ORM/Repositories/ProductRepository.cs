@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 
 /// <summary>
-/// Implementation of ICustomerRepository using Entity Framework Core
+///     Implementation of ICustomerRepository using Entity Framework Core
 /// </summary>
 public class ProductRepository : IProductRepository
 {
     private readonly DefaultContext _context;
 
     /// <summary>
-    /// Initializes a new instance of UserRepository
+    ///     Initializes a new instance of UserRepository
     /// </summary>
     /// <param name="context">The database context</param>
     public ProductRepository(DefaultContext context)
@@ -21,7 +21,7 @@ public class ProductRepository : IProductRepository
     }
 
     /// <summary>
-    /// Creates a new Product in the database
+    ///     Creates a new Product in the database
     /// </summary>
     /// <param name="product">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -34,7 +34,7 @@ public class ProductRepository : IProductRepository
     }
 
     /// <summary>
-    /// Retrieves a Product by their unique identifier
+    ///     Retrieves a Product by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -45,7 +45,7 @@ public class ProductRepository : IProductRepository
     }
 
     /// <summary>
-    /// Deletes a Product from the database
+    ///     Deletes a Product from the database
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>

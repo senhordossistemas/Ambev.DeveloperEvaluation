@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 
 /// <summary>
-/// Implementation of IBranchRepository using Entity Framework Core
+///     Implementation of IBranchRepository using Entity Framework Core
 /// </summary>
 public class BranchRepository : IBranchRepository
 {
     private readonly DefaultContext _context;
 
     /// <summary>
-    /// Initializes a new instance of UserRepository
+    ///     Initializes a new instance of UserRepository
     /// </summary>
     /// <param name="context">The database context</param>
     public BranchRepository(DefaultContext context)
@@ -21,7 +21,7 @@ public class BranchRepository : IBranchRepository
     }
 
     /// <summary>
-    /// Creates a new branch in the database
+    ///     Creates a new branch in the database
     /// </summary>
     /// <param name="branch">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -34,18 +34,18 @@ public class BranchRepository : IBranchRepository
     }
 
     /// <summary>
-    /// Retrieves a branch by their unique identifier
+    ///     Retrieves a branch by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The user if found, null otherwise</returns>
     public async Task<Branch?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.Branches.FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
+        return await _context.Branches.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 
     /// <summary>
-    /// Deletes a branch from the database
+    ///     Deletes a branch from the database
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>

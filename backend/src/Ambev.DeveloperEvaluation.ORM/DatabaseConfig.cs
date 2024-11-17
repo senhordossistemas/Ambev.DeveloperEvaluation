@@ -7,7 +7,7 @@ namespace Ambev.DeveloperEvaluation.ORM;
 public static class DatabaseConfig
 {
     /// <summary>
-    /// Apply Migrations automatically without needing to run update in the CLI
+    ///     Apply Migrations automatically without needing to run update in the CLI
     /// </summary>
     /// <param name="app"></param>
     public static void ApplyMigrations(this WebApplication app)

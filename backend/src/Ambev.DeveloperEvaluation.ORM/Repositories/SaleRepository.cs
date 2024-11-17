@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 
 /// <summary>
-/// Implementation of ISaleRepository using Entity Framework Core
+///     Implementation of ISaleRepository using Entity Framework Core
 /// </summary>
 public class SaleRepository : ISaleRepository
 {
     private readonly DefaultContext _context;
 
     /// <summary>
-    /// Initializes a new instance of UserRepository
+    ///     Initializes a new instance of UserRepository
     /// </summary>
     /// <param name="context">The database context</param>
     public SaleRepository(DefaultContext context)
@@ -21,7 +21,7 @@ public class SaleRepository : ISaleRepository
     }
 
     /// <summary>
-    /// Creates a new sale in the database
+    ///     Creates a new sale in the database
     /// </summary>
     /// <param name="sale">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -41,7 +41,7 @@ public class SaleRepository : ISaleRepository
     }
 
     /// <summary>
-    /// Retrieves a sale by their unique identifier
+    ///     Retrieves a sale by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -58,13 +58,13 @@ public class SaleRepository : ISaleRepository
         var sales = await _context.Sales
             .Include(sale => sale.Items)
             .OrderBy(s => s.SaleNumber)
-            .ToArrayAsync(cancellationToken: cancellationToken);
+            .ToArrayAsync(cancellationToken);
 
         return sales;
     }
 
     /// <summary>
-    /// Deletes a sale from the database
+    ///     Deletes a sale from the database
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>

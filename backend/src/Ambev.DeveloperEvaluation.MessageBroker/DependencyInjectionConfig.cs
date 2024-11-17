@@ -1,10 +1,10 @@
-﻿using Ambev.DeveloperEvaluation.MessageBroker.Consumers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Ambev.DeveloperEvaluation.MessageBroker.Consumers;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.MessageBroker;
 
@@ -51,7 +51,6 @@ public static class DependencyInjectionConfig
                 });
 
                 cfg.ConfigureEndpoints(context);
-
             });
         });
     }

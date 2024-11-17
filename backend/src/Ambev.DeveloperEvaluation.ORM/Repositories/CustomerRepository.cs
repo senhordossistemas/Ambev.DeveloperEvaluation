@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 
 /// <summary>
-/// Implementation of ICustomerRepository using Entity Framework Core
+///     Implementation of ICustomerRepository using Entity Framework Core
 /// </summary>
 public class CustomerRepository : ICustomerRepository
 {
     private readonly DefaultContext _context;
 
     /// <summary>
-    /// Initializes a new instance of UserRepository
+    ///     Initializes a new instance of UserRepository
     /// </summary>
     /// <param name="context">The database context</param>
     public CustomerRepository(DefaultContext context)
@@ -21,7 +21,7 @@ public class CustomerRepository : ICustomerRepository
     }
 
     /// <summary>
-    /// Creates a new Customer in the database
+    ///     Creates a new Customer in the database
     /// </summary>
     /// <param name="customer">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -34,7 +34,7 @@ public class CustomerRepository : ICustomerRepository
     }
 
     /// <summary>
-    /// Retrieves a Customer by their unique identifier
+    ///     Retrieves a Customer by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -45,7 +45,7 @@ public class CustomerRepository : ICustomerRepository
     }
 
     /// <summary>
-    /// Deletes a Customer from the database
+    ///     Deletes a Customer from the database
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>

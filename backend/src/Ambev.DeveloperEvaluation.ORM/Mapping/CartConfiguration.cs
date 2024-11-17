@@ -23,7 +23,7 @@ public class CartConfiguration : IEntityTypeConfiguration<Cart>
             .WithMany()
             .HasForeignKey(s => s.UserId)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         builder.HasMany(s => s.Products)
             .WithOne(i => i.Cart)
             .HasForeignKey(i => i.CartId)

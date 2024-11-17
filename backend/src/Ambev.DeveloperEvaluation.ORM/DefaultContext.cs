@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
-using System.Reflection;
+﻿using System.Reflection;
 using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.CartAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace Ambev.DeveloperEvaluation.ORM;
 
@@ -27,6 +27,7 @@ public class DefaultContext(DbContextOptions<DefaultContext> options) : DbContex
         base.OnModelCreating(modelBuilder);
     }
 }
+
 public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
 {
     public DefaultContext CreateDbContext(string[] args)
@@ -40,8 +41,8 @@ public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         builder.UseNpgsql(
-               connectionString,
-               b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
+            connectionString,
+            b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
         );
 
         return new DefaultContext(builder.Options);
