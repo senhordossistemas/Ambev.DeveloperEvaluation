@@ -1,8 +1,8 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.CartAggregate.Dtos;
 
-namespace Ambev.DeveloperEvaluation.Application.CartFeatures.Commands.CreateCart;
+namespace Ambev.DeveloperEvaluation.Application.CartFeatures.Commands.CreateOrUpdateCart;
 
-public sealed record CreateCartResult
+public sealed record CreateOrUpdateCartResult
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }

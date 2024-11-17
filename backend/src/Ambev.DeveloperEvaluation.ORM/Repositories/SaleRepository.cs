@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate;
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;

@@ -1,7 +1,8 @@
-﻿using Ambev.DeveloperEvaluation.Application.CartFeatures.Commands.CreateCart;
-using Ambev.DeveloperEvaluation.Application.CartFeatures.Commands.UpdateCart;
+﻿using Ambev.DeveloperEvaluation.Application.CartFeatures.Commands.CreateOrUpdateCart;
+using Ambev.DeveloperEvaluation.Application.CartFeatures.Commands.DeleteCart;
+using Ambev.DeveloperEvaluation.Application.CartFeatures.Queries.GetCart;
 using Ambev.DeveloperEvaluation.WebApi.Common;
-using Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateCart;
+using Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateOrUpdateCart;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -12,36 +13,8 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts;
 [Route("api/[controller]")]
 public class CartsController (IMediator mediator, IMapper mapper) : BaseController
 {
-    // <summary>
-    ///     Creates a new Cart
-    /// </summary>
-    /// <param name="request">The sale creation request</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The created sale details</returns>
-    [HttpPost]
-    [ProducesResponseType(typeof(ApiResponseWithData<CreateCartResponse>), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] CreateCartRequest request, CancellationToken cancellationToken)
-    {
-        var validator = new CreateCartRequestValidator();
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
-        if (!validationResult.IsValid)
-            return BadRequest(validationResult.Errors);
-
-        var command = mapper.Map<CreateCartCommand>(request);
-        var response = await mediator.Send(command, cancellationToken);
-
-        return Created(string.Empty, new ApiResponseWithData<CreateCartResponse>
-        {
-            Success = true,
-            Message = "Cart created successfully",
-            Data = mapper.Map<CreateCartResponse>(response)
-        });
-    }
-    
-    [HttpPut("create-or-update-cart/{userId:guid}")]
-    [ProducesResponseType(typeof(ApiResponseWithData<UpdateCartResult>), StatusCodes.Status200OK)]
+    [HttpPut("create-or-update-item/{userId:guid}")]
+    [ProducesResponseType(typeof(ApiResponseWithData<CreateOrUpdateCartResult>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateOrUpdate([FromRoute] Guid userId, [FromBody] CartItemRequest request,
         CancellationToken cancellationToken)
@@ -50,10 +23,39 @@ public class CartsController (IMediator mediator, IMapper mapper) : BaseControll
 
         var response = await mediator.Send(command, cancellationToken);
 
-        return Ok(new ApiResponseWithData<UpdateCartResult>
+        return Ok(new ApiResponseWithData<CreateOrUpdateCartResult>
         {
             Success = true,
             Message = "Cart updated successfully",
+            Data = response
+        });
+    }
+    
+    [HttpDelete("remove-item{userId:guid}/{productId:guid}")]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete([FromRoute] Guid userId, Guid productId, CancellationToken cancellationToken)
+    {
+        await mediator.Send(new DeleteCartItemCommand(userId, productId), cancellationToken);
+
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "Cart deleted successfully"
+        });
+    }
+    
+    [HttpGet("{userId:guid}")]
+    [ProducesResponseType(typeof(ApiResponseWithData<GetCartResult>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetCartById([FromRoute] Guid userId, CancellationToken cancellationToken)
+    {
+        var response = await mediator.Send(new GetCartByUserQuery(userId), cancellationToken);
+
+        return Ok(new ApiResponseWithData<GetCartResult>
+        {
+            Success = true,
+            Message = "Cart retrieved successfully",
             Data = response
         });
     }

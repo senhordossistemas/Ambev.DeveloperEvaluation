@@ -7,7 +7,7 @@ public class Cart(Guid userId) : BaseEntity
     public Guid UserId { get; private set; } = userId;
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; private set; }
-
+    
     private readonly List<CartItem> _products = [];
     public IReadOnlyCollection<CartItem> Products => _products;
 
@@ -29,7 +29,7 @@ public class Cart(Guid userId) : BaseEntity
     public void RemoveProduct(Guid productId)
     {
         var product = _products.Find(p => p.ProductId == productId)
-            ?? throw new KeyNotFoundException($"Product with ID {productId} not found in cart.");
+                      ?? throw new KeyNotFoundException($"Product with ID {productId} not found in cart.");
 
         _products.Remove(product);
     }
