@@ -11,36 +11,42 @@ public sealed class Error(string code, string message) : IEquatable<Error>
 
     public bool Equals(Error? other)
     {
-        if (other is null)
-        {
-            return false;
-        }
+        if (other is null) return false;
 
         return Code == other.Code && Message == other.Message;
     }
 
-    public static implicit operator string(Error error) => error.Code;
+    public static implicit operator string(Error error)
+    {
+        return error.Code;
+    }
 
     public static bool operator ==(Error? a, Error? b)
     {
-        if (a is null && b is null)
-        {
-            return true;
-        }
+        if (a is null && b is null) return true;
 
-        if (a is null || b is null)
-        {
-            return false;
-        }
+        if (a is null || b is null) return false;
 
         return a.Equals(b);
     }
 
-    public static bool operator !=(Error? a, Error? b) => !(a == b);
+    public static bool operator !=(Error? a, Error? b)
+    {
+        return !(a == b);
+    }
 
-    public override bool Equals(object? obj) => obj is Error error && Equals(error);
+    public override bool Equals(object? obj)
+    {
+        return obj is Error error && Equals(error);
+    }
 
-    public override int GetHashCode() => HashCode.Combine(Code, Message);
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Code, Message);
+    }
 
-    public override string ToString() => Code;
+    public override string ToString()
+    {
+        return Code;
+    }
 }

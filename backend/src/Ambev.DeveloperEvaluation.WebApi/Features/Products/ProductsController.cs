@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.ProductAggregate;
+﻿using Ambev.DeveloperEvaluation.Application.ProductFeatures;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 using AutoMapper;
@@ -12,7 +12,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products;
 public class ProductsController(IMediator mediator, IMapper mapper) : BaseController
 {
     /// <summary>
-    /// Creates a new customer
+    ///     Creates a new customer
     /// </summary>
     /// <param name="request">The customer creation request</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -20,7 +20,8 @@ public class ProductsController(IMediator mediator, IMapper mapper) : BaseContro
     [HttpPost]
     [ProducesResponseType(typeof(ApiResponseWithData<CreateProductResponse>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request,
+        CancellationToken cancellationToken)
     {
         var validator = new CreateProductRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);

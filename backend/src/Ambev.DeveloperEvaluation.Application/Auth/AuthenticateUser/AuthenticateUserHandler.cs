@@ -1,53 +1,35 @@
-using System.Threading;
-using System.Threading.Tasks;
 using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Specifications;
-using Ambev.DeveloperEvaluation.Domain.Specifications;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
+namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
+
+public class AuthenticateUserHandler(
+    IUserRepository userRepository,
+    IPasswordHasher passwordHasher,
+    IJwtTokenGenerator jwtTokenGenerator)
+    : IRequestHandler<AuthenticateUserCommand, AuthenticateUserResult>
 {
-    public class AuthenticateUserHandler : IRequestHandler<AuthenticateUserCommand, AuthenticateUserResult>
+    public async Task<AuthenticateUserResult> Handle(AuthenticateUserCommand request,
+        CancellationToken cancellationToken)
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IPasswordHasher _passwordHasher;
-        private readonly IJwtTokenGenerator _jwtTokenGenerator;
+        var user = await userRepository.GetByEmailAsync(request.Email, cancellationToken);
 
-        public AuthenticateUserHandler(
-            IUserRepository userRepository,
-            IPasswordHasher passwordHasher,
-            IJwtTokenGenerator jwtTokenGenerator)
+        if (user == null || !passwordHasher.VerifyPassword(request.Password, user.Password))
+            throw new UnauthorizedAccessException("Invalid credentials");
+
+        var activeUserSpec = new ActiveUserSpecification();
+        if (!activeUserSpec.IsSatisfiedBy(user)) throw new UnauthorizedAccessException("User is not active");
+
+        var token = jwtTokenGenerator.GenerateToken(user);
+
+        return new AuthenticateUserResult
         {
-            _userRepository = userRepository;
-            _passwordHasher = passwordHasher;
-            _jwtTokenGenerator = jwtTokenGenerator;
-        }
-
-        public async Task<AuthenticateUserResult> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _userRepository.GetByEmailAsync(request.Email, cancellationToken);
-            
-            if (user == null || !_passwordHasher.VerifyPassword(request.Password, user.Password))
-            {
-                throw new UnauthorizedAccessException("Invalid credentials");
-            }
-
-            var activeUserSpec = new ActiveUserSpecification();
-            if (!activeUserSpec.IsSatisfiedBy(user))
-            {
-                throw new UnauthorizedAccessException("User is not active");
-            }
-
-            var token = _jwtTokenGenerator.GenerateToken(user);
-
-            return new AuthenticateUserResult
-            {
-                Token = token,
-                Email = user.Email,
-                Name = user.Username,
-                Role = user.Role.ToString()
-            };
-        }
+            Token = token,
+            Email = user.Email,
+            Name = user.Username,
+            Role = user.Role.ToString()
+        };
     }
 }

@@ -2,14 +2,13 @@
 
 namespace Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Repositories;
 
-
 /// <summary>
-/// Repository interface for Product entity operations
+///     Repository interface for Product entity operations
 /// </summary>
 public interface IProductRepository
 {
     /// <summary>
-    /// Creates a new Product in the repository
+    ///     Creates a new Product in the repository
     /// </summary>
     /// <param name="product">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -17,7 +16,7 @@ public interface IProductRepository
     Task<Product> CreateAsync(Product product, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Retrieves a Product by their unique identifier
+    ///     Retrieves a Product by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -25,7 +24,7 @@ public interface IProductRepository
     Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Deletes a Product from the repository
+    ///     Deletes a Product from the repository
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>

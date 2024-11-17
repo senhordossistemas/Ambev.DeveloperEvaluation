@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Events;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Events;
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
 using AutoMapper;
 using FluentValidation;
@@ -17,14 +18,17 @@ public class UpdateSaleCommandHandler(ISaleRepository saleRepository, IMapper ma
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var sale = await saleRepository.GetByIdAsync(command.Id, cancellationToken) 
+        var sale = await saleRepository.GetByIdAsync(command.Id, cancellationToken)
                    ?? throw new Exception($"Sale with Id {command.Id} not found.");
 
         sale.UpdateSaleDetails(command.TotalAmount, command.IsCancelled, command.CustomerId, command.BranchId);
-        sale.UpdateItems(command.Items);
+
+        var items = mapper.Map<SaleItem[]>(command.Items);
+        
+        sale.UpdateItems(items);
 
         var updatedSale = await saleRepository.UpdateAsync(sale, cancellationToken);
-        
+
         await mediator.Publish(new SaleUpdatedEvent(updatedSale), cancellationToken);
 
         return mapper.Map<UpdateSaleResult>(updatedSale);

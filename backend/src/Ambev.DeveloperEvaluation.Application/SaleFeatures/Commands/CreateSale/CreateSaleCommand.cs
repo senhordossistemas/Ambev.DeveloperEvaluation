@@ -12,7 +12,6 @@ public sealed record CreateSaleCommand(
     Guid? BranchId,
     IEnumerable<SaleItemDto> Items) : IRequest<CreateSaleResult>
 {
-
     public ValidationResultDetail Validate()
     {
         var validator = new CreateSaleCommandValidator();
@@ -23,5 +22,4 @@ public sealed record CreateSaleCommand(
             Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
         };
     }
-
 }

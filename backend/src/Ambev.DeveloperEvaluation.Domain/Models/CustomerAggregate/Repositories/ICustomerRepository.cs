@@ -3,12 +3,12 @@
 namespace Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Repositories;
 
 /// <summary>
-/// Repository interface for Customer entity operations
+///     Repository interface for Customer entity operations
 /// </summary>
 public interface ICustomerRepository
 {
     /// <summary>
-    /// Creates a new customer in the repository
+    ///     Creates a new customer in the repository
     /// </summary>
     /// <param name="customer">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -16,7 +16,7 @@ public interface ICustomerRepository
     Task<Customer> CreateAsync(Customer customer, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Retrieves a customer by their unique identifier
+    ///     Retrieves a customer by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -24,7 +24,7 @@ public interface ICustomerRepository
     Task<Customer?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Deletes a customer from the repository
+    ///     Deletes a customer from the repository
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>

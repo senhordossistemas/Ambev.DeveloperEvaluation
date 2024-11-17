@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.CustomerAggregate;
+﻿using Ambev.DeveloperEvaluation.Application.CustomerFeatures;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Customers.CreateCustomer;
 using AutoMapper;
@@ -12,7 +12,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Customers;
 public class CustomersController(IMediator mediator, IMapper mapper) : BaseController
 {
     /// <summary>
-    /// Creates a new customer
+    ///     Creates a new customer
     /// </summary>
     /// <param name="request">The customer creation request</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -20,7 +20,8 @@ public class CustomersController(IMediator mediator, IMapper mapper) : BaseContr
     [HttpPost]
     [ProducesResponseType(typeof(ApiResponseWithData<CreateCustomerResponse>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request,
+        CancellationToken cancellationToken)
     {
         var validator = new CreateCustomerRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
