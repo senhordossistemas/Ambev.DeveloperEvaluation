@@ -7,7 +7,6 @@ public sealed record CreateCustomerCommand(
     string Name,
     string ExternalId) : IRequest<CreateCustomerResult>
 {
-
     public ValidationResultDetail Validate()
     {
         var validator = new CreateCustomerCommandValidator();
@@ -18,5 +17,4 @@ public sealed record CreateCustomerCommand(
             Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
         };
     }
-
 }

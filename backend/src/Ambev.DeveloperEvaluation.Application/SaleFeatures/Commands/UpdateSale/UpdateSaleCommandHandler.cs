@@ -17,14 +17,14 @@ public class UpdateSaleCommandHandler(ISaleRepository saleRepository, IMapper ma
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var sale = await saleRepository.GetByIdAsync(command.Id, cancellationToken) 
+        var sale = await saleRepository.GetByIdAsync(command.Id, cancellationToken)
                    ?? throw new Exception($"Sale with Id {command.Id} not found.");
 
         sale.UpdateSaleDetails(command.TotalAmount, command.IsCancelled, command.CustomerId, command.BranchId);
         sale.UpdateItems(command.Items);
 
         var updatedSale = await saleRepository.UpdateAsync(sale, cancellationToken);
-        
+
         await mediator.Publish(new SaleUpdatedEvent(updatedSale), cancellationToken);
 
         return mapper.Map<UpdateSaleResult>(updatedSale);

@@ -29,4 +29,3 @@ public class SaleUpdatedEventHandler(IPublishEndpoint publishEndpoint) : IDomain
         }
     }
 }
-

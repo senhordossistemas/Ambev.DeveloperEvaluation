@@ -10,10 +10,10 @@ public class CancelItemCommandHandler(ISaleRepository saleRepository, IMediator 
     public async Task<bool> Handle(CancelItemCommand command, CancellationToken cancellationToken)
     {
         var sale = await saleRepository.GetByIdAsync(command.SaleId, cancellationToken)
-            ?? throw new KeyNotFoundException($"Sale with ID {command.SaleId} not found.");
+                   ?? throw new KeyNotFoundException($"Sale with ID {command.SaleId} not found.");
 
         var item = sale.Items.FirstOrDefault(i => i.Id == command.ItemId)
-       ?? throw new KeyNotFoundException($"Item with ID {command.ItemId} not found in sale.");
+                   ?? throw new KeyNotFoundException($"Item with ID {command.ItemId} not found in sale.");
 
         sale.CancelItem(command.ItemId);
 

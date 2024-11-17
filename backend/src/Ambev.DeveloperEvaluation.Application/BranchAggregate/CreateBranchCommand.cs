@@ -7,7 +7,6 @@ public sealed record CreateBranchCommand(
     string Name,
     string Location) : IRequest<CreateBranchResult>
 {
-
     public ValidationResultDetail Validate()
     {
         var validator = new CreateBranchCommandValidator();
@@ -18,5 +17,4 @@ public sealed record CreateBranchCommand(
             Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
         };
     }
-
 }

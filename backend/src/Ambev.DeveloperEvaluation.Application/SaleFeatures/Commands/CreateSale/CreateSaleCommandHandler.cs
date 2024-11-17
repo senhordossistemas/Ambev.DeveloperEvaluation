@@ -26,7 +26,7 @@ public class CreateSaleCommandHandler(ISaleRepository saleRepository, IMapper ma
         var result = mapper.Map<CreateSaleResult>(createdSale);
 
         await mediator.Publish(new SaleCreatedEvent(createdSale), cancellationToken);
-        
+
         return result;
     }
 }

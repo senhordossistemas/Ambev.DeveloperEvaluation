@@ -13,6 +13,7 @@ public sealed record UpdateSaleCommand(
     IEnumerable<SaleItemDto> Items
 ) : IRequest<UpdateSaleResult>
 {
-    public UpdateSaleCommand() : this(default, string.Empty, 0, false, null, null, []) { }
+    public UpdateSaleCommand() : this(default, string.Empty, 0, false, null, null, [])
+    {
+    }
 }
-

@@ -5,7 +5,7 @@ namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.DeleteSale
 public class DeleteSaleValidator : AbstractValidator<DeleteSaleCommand>
 {
     /// <summary>
-    /// Initializes validation rules for DeleteSaleCommand
+    ///     Initializes validation rules for DeleteSaleCommand
     /// </summary>
     public DeleteSaleValidator()
     {

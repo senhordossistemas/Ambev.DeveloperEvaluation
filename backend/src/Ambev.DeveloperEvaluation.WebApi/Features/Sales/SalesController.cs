@@ -3,7 +3,6 @@ using Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.CreateSale;
 using Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.DeleteSale;
 using Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.UpdateSale;
 using Ambev.DeveloperEvaluation.Application.SaleFeatures.Queries.GetSale;
-using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Dtos;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.UpdateSale;
@@ -18,7 +17,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales;
 public class SalesController(IMediator mediator, IMapper mapper) : BaseController
 {
     /// <summary>
-    /// Creates a new sale
+    ///     Creates a new sale
     /// </summary>
     /// <param name="request">The sale creation request</param>
     /// <param name="cancellationToken">Cancellation token</param>

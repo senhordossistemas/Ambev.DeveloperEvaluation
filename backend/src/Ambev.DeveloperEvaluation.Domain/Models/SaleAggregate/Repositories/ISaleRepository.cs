@@ -3,22 +3,22 @@ using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
 
 /// <summary>
-/// Repository interface for Sale entity operations
+///     Repository interface for Sale entity operations
 /// </summary>
 public interface ISaleRepository
 {
     /// <summary>
-    /// Creates a new sale in the repository
+    ///     Creates a new sale in the repository
     /// </summary>
     /// <param name="sale">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created user</returns>
     Task<Sale> CreateAsync(Sale sale, CancellationToken cancellationToken = default);
-    
+
     Task<Sale> UpdateAsync(Sale sale, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Retrieves a sale by their unique identifier
+    ///     Retrieves a sale by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -28,7 +28,7 @@ public interface ISaleRepository
     Task<Sale[]?> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Deletes a sale from the repository
+    ///     Deletes a sale from the repository
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>

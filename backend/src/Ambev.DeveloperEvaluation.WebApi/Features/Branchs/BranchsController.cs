@@ -12,7 +12,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Branchs;
 public class BranchsController(IMediator mediator, IMapper mapper) : BaseController
 {
     /// <summary>
-    /// Creates a new branch
+    ///     Creates a new branch
     /// </summary>
     /// <param name="request">The branch creation request</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -20,7 +20,8 @@ public class BranchsController(IMediator mediator, IMapper mapper) : BaseControl
     [HttpPost]
     [ProducesResponseType(typeof(ApiResponseWithData<CreateBranchResponse>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateBranch([FromBody] CreateBranchRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateBranch([FromBody] CreateBranchRequest request,
+        CancellationToken cancellationToken)
     {
         var validator = new CreateBranchRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
