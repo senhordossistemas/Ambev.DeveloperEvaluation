@@ -33,6 +33,13 @@ public class SaleRepository : ISaleRepository
         return sale;
     }
 
+    public async Task<Sale> UpdateAsync(Sale sale, CancellationToken cancellationToken = default)
+    {
+        _context.Sales.Update(sale);
+        await _context.SaveChangesAsync(cancellationToken);
+        return sale;
+    }
+
     /// <summary>
     /// Retrieves a sale by their unique identifier
     /// </summary>
@@ -41,7 +48,19 @@ public class SaleRepository : ISaleRepository
     /// <returns>The user if found, null otherwise</returns>
     public async Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.Sales.FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
+        return await _context.Sales
+            .Include(sale => sale.Items)
+            .FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+    }
+
+    public async Task<Sale[]?> GetAsync(CancellationToken cancellationToken = default)
+    {
+        var sales = await _context.Sales
+            .Include(sale => sale.Items)
+            .OrderBy(s => s.SaleNumber)
+            .ToArrayAsync(cancellationToken: cancellationToken);
+
+        return sales;
     }
 
     /// <summary>
