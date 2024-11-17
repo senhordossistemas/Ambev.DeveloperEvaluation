@@ -1,6 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
 
-namespace Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Repositories;
+namespace Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate;
 
 /// <summary>
 ///     Repository interface for Customer entity operations

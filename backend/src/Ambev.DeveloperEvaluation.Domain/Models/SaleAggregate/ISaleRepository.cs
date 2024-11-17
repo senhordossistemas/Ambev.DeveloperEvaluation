@@ -1,6 +1,6 @@
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 
-namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
+namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate;
 
 /// <summary>
 ///     Repository interface for Sale entity operations

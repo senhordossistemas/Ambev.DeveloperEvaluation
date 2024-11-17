@@ -1,8 +1,8 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate;
 using Ambev.DeveloperEvaluation.Domain.Models.CartAggregate;
-using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Repositories;
-using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Repositories;
-using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
+using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate;
+using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate;
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate;
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
 using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.ORM.Repositories;

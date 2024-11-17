@@ -1,30 +1,30 @@
-using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Entities;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate.Entities;
 
-namespace Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Repositories;
+namespace Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate;
 
 /// <summary>
-///     Repository interface for Branch entity operations
+///     Repository interface for Product entity operations
 /// </summary>
-public interface IBranchRepository
+public interface IProductRepository
 {
     /// <summary>
-    ///     Creates a new Branch in the repository
+    ///     Creates a new Product in the repository
     /// </summary>
-    /// <param name="branch">The user to create</param>
+    /// <param name="product">The user to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created user</returns>
-    Task<Branch> CreateAsync(Branch branch, CancellationToken cancellationToken = default);
+    Task<Product> CreateAsync(Product product, CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     Retrieves a Branch by their unique identifier
+    ///     Retrieves a Product by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the user</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The user if found, null otherwise</returns>
-    Task<Branch?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     Deletes a branch from the repository
+    ///     Deletes a Product from the repository
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>

@@ -7,7 +7,7 @@ public class CartItem(Guid cartId, Guid productId, int quantity) : BaseEntity
     public Guid ProductId { get; private set; } = productId;
     public int Quantity { get; private set; } = quantity;
     public Guid CartId { get; private set; } = cartId;
-    public Cart Cart { get; private set; }
+    public Cart Cart { get; }
 
     public void UpdateQuantity(int quantity)
     {

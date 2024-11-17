@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate;
+using Ambev.DeveloperEvaluation.Domain.Models.BranchAggregate.Entities;
 using AutoMapper;
 using FluentValidation;
 using MediatR;

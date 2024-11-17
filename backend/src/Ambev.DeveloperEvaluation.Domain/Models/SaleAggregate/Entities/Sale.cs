@@ -25,17 +25,17 @@ public class Sale : BaseEntity
     public void UpdateItems(SaleItem[] items)
     {
         _items.RemoveAll(x => items.All(itemScreen => itemScreen.ProductId != x.ProductId));
-        
+
         foreach (var itemScreen in items)
         {
             var existingItem = _items.Find(item => item.ProductId == itemScreen.ProductId);
-            
+
             if (existingItem is not null)
                 existingItem.Update(itemScreen);
             else
                 _items.Add(itemScreen);
         }
-        
+
         Calculate();
         UpdateTimestamp();
     }

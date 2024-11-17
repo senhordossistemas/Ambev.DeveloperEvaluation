@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate;
+using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
 using AutoMapper;
 using FluentValidation;
 using MediatR;

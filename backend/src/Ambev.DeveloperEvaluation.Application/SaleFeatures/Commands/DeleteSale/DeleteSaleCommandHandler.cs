@@ -1,5 +1,5 @@
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate;
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Events;
-using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
 using FluentValidation;
 using MediatR;
 

@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate;
+using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;

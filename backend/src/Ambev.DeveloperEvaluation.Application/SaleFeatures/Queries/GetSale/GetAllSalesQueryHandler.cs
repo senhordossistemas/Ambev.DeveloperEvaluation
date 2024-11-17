@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate;
 using AutoMapper;
 using MediatR;
 
