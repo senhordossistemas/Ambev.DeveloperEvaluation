@@ -45,6 +45,9 @@ public class Sale : BaseEntity
     {
         _items.Clear();
         _items.AddRange(items.Select(item => new SaleItem( item.Quantity, item.UnitPrice, item.ProductId, Id)));
+        
+        Calculate();
+        UpdateTimestamp();
     }
 
     public void UpdateTimestamp() => UpdatedAt = DateTime.UtcNow;

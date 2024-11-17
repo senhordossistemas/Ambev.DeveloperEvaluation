@@ -1,11 +1,12 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Events;
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Repositories;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Commands.UpdateSale;
 
-public class UpdateSaleCommandHandler(ISaleRepository saleRepository, IMapper mapper)
+public class UpdateSaleCommandHandler(ISaleRepository saleRepository, IMapper mapper, IMediator mediator)
     : IRequestHandler<UpdateSaleCommand, UpdateSaleResult>
 {
     public async Task<UpdateSaleResult> Handle(UpdateSaleCommand command, CancellationToken cancellationToken)
@@ -22,10 +23,9 @@ public class UpdateSaleCommandHandler(ISaleRepository saleRepository, IMapper ma
         sale.UpdateSaleDetails(command.TotalAmount, command.IsCancelled, command.CustomerId, command.BranchId);
         sale.UpdateItems(command.Items);
 
-        sale.Calculate();
-        sale.UpdateTimestamp();
-
         var updatedSale = await saleRepository.UpdateAsync(sale, cancellationToken);
+        
+        await mediator.Publish(new SaleUpdatedEvent(updatedSale), cancellationToken);
 
         return mapper.Map<UpdateSaleResult>(updatedSale);
     }
