@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
+using Ambev.DeveloperEvaluation.Unit.Domain.Entities.TestData;
 using FluentAssertions;
 using Xunit;
 
@@ -90,5 +91,22 @@ public class SaleTests
 
         // Assert
         item.Discount.Should().Be(expectedDiscount);
+    }
+
+    /// <summary>
+    /// Tests that validation passes when all sale properties are valid.
+    /// </summary>
+    [Fact(DisplayName = "Validation should pass for valid sale data")]
+    public void Given_ValidSaleData_When_Validated_Then_ShouldReturnValid()
+    {
+        // Arrange
+        var sale = SaleTestData.GenerateValidSale();
+
+        // Act
+        var result = sale.Validate();
+
+        // Assert
+        Assert.True(result.IsValid);
+        Assert.Empty(result.Errors);
     }
 }

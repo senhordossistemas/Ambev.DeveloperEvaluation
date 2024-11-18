@@ -21,7 +21,7 @@ public class UpdateSaleCommandHandler(ISaleRepository saleRepository, IMapper ma
         var sale = await saleRepository.GetByIdAsync(command.Id, cancellationToken)
                    ?? throw new Exception($"Sale with Id {command.Id} not found.");
 
-        sale.UpdateSaleDetails(command.TotalAmount, command.IsCancelled, command.CustomerId, command.BranchId);
+        sale.Update(command.TotalAmount, command.IsCancelled, command.CustomerId, command.BranchId);
 
         var items = mapper.Map<SaleItem[]>(command.Items);
         

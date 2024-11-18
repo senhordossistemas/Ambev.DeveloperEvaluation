@@ -1,4 +1,6 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Common;
+﻿using Ambev.DeveloperEvaluation.Common.Validation;
+using Ambev.DeveloperEvaluation.Domain.Common;
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Validation;
 
 namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 
@@ -11,11 +13,22 @@ public class Sale : BaseEntity
     public Guid? BranchId { get; private set; }
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; private set; }
-    
+
     private readonly List<SaleItem> _items = [];
     public IReadOnlyCollection<SaleItem> Items => _items;
+    
+    public ValidationResultDetail Validate()
+    {
+        var validator = new SaleValidator();
+        var result = validator.Validate(this);
+        return new ValidationResultDetail
+        {
+            IsValid = result.IsValid,
+            Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
+        };
+    }
 
-    public void UpdateSaleDetails(decimal totalAmount, bool isCancelled, Guid? customerId, Guid? branchId)
+    public void Update(decimal totalAmount, bool isCancelled, Guid? customerId, Guid? branchId)
     {
         TotalAmount = totalAmount;
         IsCancelled = isCancelled;
@@ -47,17 +60,6 @@ public class Sale : BaseEntity
         CalculateDiscount();
     }
 
-    private void CalculateTotalAmount()
-    {
-        TotalAmount = _items.Sum(item => item.Quantity);
-    }
-
-    private void CalculateDiscount()
-    {
-        foreach (var item in _items)
-            item.CalculateDiscount();
-    }
-
     public void Cancel()
     {
         if (IsCancelled)
@@ -74,8 +76,14 @@ public class Sale : BaseEntity
             throw new KeyNotFoundException($"Item with ID {itemId} not found.");
 
         _items.Remove(item);
-        UpdateTimestamp();
-        Calculate();
+
+        if (_items.Count == 0)
+            Cancel();
+        else
+        {
+            Calculate();
+            UpdateTimestamp();
+        }
     }
 
     public void UpdateTimestamp()
@@ -87,4 +95,16 @@ public class Sale : BaseEntity
     {
         _items.Add(item);
     }
+    
+    private void CalculateTotalAmount()
+    {
+        TotalAmount = _items.Sum(item => item.Quantity);
+    }
+
+    private void CalculateDiscount()
+    {
+        foreach (var item in _items)
+            item.CalculateDiscount();
+    }
+
 }
