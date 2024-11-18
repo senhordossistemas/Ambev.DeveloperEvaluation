@@ -1,4 +1,4 @@
-using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate;
 using FluentValidation;
 using MediatR;
 

@@ -141,4 +141,16 @@ public class User : BaseEntity, IUser
         Status = UserStatus.Suspended;
         UpdatedAt = DateTime.UtcNow;
     }
+
+    public void Update(string username, string password, string phone, string email, UserStatus status, UserRole role)
+    {
+        Username = username;
+        Password = password;
+        Phone = phone;
+        Email = email;
+        Status = status;
+        Role = role;
+
+        Activate();
+    }
 }

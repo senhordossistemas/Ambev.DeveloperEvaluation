@@ -1,6 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Security;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate;
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
 using AutoMapper;
 using FluentValidation;
 using MediatR;

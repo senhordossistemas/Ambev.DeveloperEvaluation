@@ -1,5 +1,5 @@
 using Ambev.DeveloperEvaluation.Common.Security;
-using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate;
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Specifications;
 using MediatR;
 

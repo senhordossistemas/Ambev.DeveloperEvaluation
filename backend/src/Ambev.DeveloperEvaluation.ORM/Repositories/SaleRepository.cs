@@ -33,6 +33,12 @@ public class SaleRepository : ISaleRepository
         return sale;
     }
 
+    /// <summary>
+    ///     Update a sale
+    /// </summary>
+    /// <param name="sale"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<Sale> UpdateAsync(Sale sale, CancellationToken cancellationToken = default)
     {
         _context.Sales.Update(sale);

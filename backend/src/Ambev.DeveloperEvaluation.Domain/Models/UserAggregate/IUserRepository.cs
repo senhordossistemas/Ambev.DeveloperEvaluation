@@ -1,6 +1,6 @@
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
 
-namespace Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
+namespace Ambev.DeveloperEvaluation.Domain.Models.UserAggregate;
 
 /// <summary>
 ///     Repository interface for User entity operations
@@ -14,6 +14,14 @@ public interface IUserRepository
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created user</returns>
     Task<User> CreateAsync(User user, CancellationToken cancellationToken = default);
+    
+    /// <summary>
+    ///     Update a user   
+    /// </summary>
+    /// <param name="user"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<User> UpdateAsync(User user, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Retrieves a user by their unique identifier

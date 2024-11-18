@@ -1,7 +1,7 @@
 using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 using Ambev.DeveloperEvaluation.Common.Security;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate;
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
 using Ambev.DeveloperEvaluation.Unit.Domain;
 using AutoMapper;
 using FluentAssertions;

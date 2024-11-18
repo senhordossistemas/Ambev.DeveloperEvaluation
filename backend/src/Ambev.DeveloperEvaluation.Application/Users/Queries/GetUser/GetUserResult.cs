@@ -1,6 +1,6 @@
 using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Enums;
 
-namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
+namespace Ambev.DeveloperEvaluation.Application.Users.Queries.GetUser;
 
 /// <summary>
 ///     Response model for GetUser operation

@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
-using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
@@ -29,6 +29,13 @@ public class UserRepository : IUserRepository
     public async Task<User> CreateAsync(User user, CancellationToken cancellationToken = default)
     {
         await _context.Users.AddAsync(user, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+        return user;
+    }
+
+    public async Task<User> UpdateAsync(User user, CancellationToken cancellationToken = default)
+    {
+        _context.Users.Update(user);
         await _context.SaveChangesAsync(cancellationToken);
         return user;
     }

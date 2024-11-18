@@ -1,10 +1,12 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 using Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
-using Ambev.DeveloperEvaluation.Application.Users.GetUser;
+using Ambev.DeveloperEvaluation.Application.Users.Queries.GetUser;
+using Ambev.DeveloperEvaluation.Application.Users.UpdateUser;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 using Ambev.DeveloperEvaluation.WebApi.Features.Users.DeleteUser;
 using Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser;
+using Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -16,22 +18,8 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Users;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class UsersController : BaseController
+public class UsersController(IMediator mediator, IMapper mapper) : BaseController
 {
-    private readonly IMapper _mapper;
-    private readonly IMediator _mediator;
-
-    /// <summary>
-    ///     Initializes a new instance of UsersController
-    /// </summary>
-    /// <param name="mediator">The mediator instance</param>
-    /// <param name="mapper">The AutoMapper instance</param>
-    public UsersController(IMediator mediator, IMapper mapper)
-    {
-        _mediator = mediator;
-        _mapper = mapper;
-    }
-
     /// <summary>
     ///     Creates a new user
     /// </summary>
@@ -41,7 +29,7 @@ public class UsersController : BaseController
     [HttpPost]
     [ProducesResponseType(typeof(ApiResponseWithData<CreateUserResponse>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request,
+    public async Task<IActionResult> Create([FromBody] CreateUserRequest request,
         CancellationToken cancellationToken)
     {
         var validator = new CreateUserRequestValidator();
@@ -50,14 +38,38 @@ public class UsersController : BaseController
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<CreateUserCommand>(request);
-        var response = await _mediator.Send(command, cancellationToken);
+        var command = mapper.Map<CreateUserCommand>(request);
+        var response = await mediator.Send(command, cancellationToken);
 
         return Created(string.Empty, new ApiResponseWithData<CreateUserResponse>
         {
             Success = true,
             Message = "User created successfully",
-            Data = _mapper.Map<CreateUserResponse>(response)
+            Data = mapper.Map<CreateUserResponse>(response)
+        });
+    }
+    
+    [HttpPut("{id:guid}")]
+    [ProducesResponseType(typeof(ApiResponseWithData<UpdateUserResult>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateUserRequest request,
+        CancellationToken cancellationToken)
+    {
+        var validator = new UpdateUserRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+
+        var command = mapper.Map<UpdateUserCommand>(request) with { Id = id };
+
+        var response = await mediator.Send(command, cancellationToken);
+
+        return Ok(new ApiResponseWithData<UpdateUserResult>
+        {
+            Success = true,
+            Message = "User updated successfully",
+            Data = response
         });
     }
 
@@ -71,7 +83,7 @@ public class UsersController : BaseController
     [ProducesResponseType(typeof(ApiResponseWithData<GetUserResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetUser([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var request = new GetUserRequest { Id = id };
         var validator = new GetUserRequestValidator();
@@ -80,14 +92,14 @@ public class UsersController : BaseController
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<GetUserCommand>(request.Id);
-        var response = await _mediator.Send(command, cancellationToken);
+        var command = mapper.Map<GetUserQuery>(request.Id);
+        var response = await mediator.Send(command, cancellationToken);
 
         return Ok(new ApiResponseWithData<GetUserResponse>
         {
             Success = true,
             Message = "User retrieved successfully",
-            Data = _mapper.Map<GetUserResponse>(response)
+            Data = mapper.Map<GetUserResponse>(response)
         });
     }
 
@@ -101,7 +113,7 @@ public class UsersController : BaseController
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteUser([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var request = new DeleteUserRequest { Id = id };
         var validator = new DeleteUserRequestValidator();
@@ -110,8 +122,8 @@ public class UsersController : BaseController
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<DeleteUserCommand>(request.Id);
-        await _mediator.Send(command, cancellationToken);
+        var command = mapper.Map<DeleteUserCommand>(request.Id);
+        await mediator.Send(command, cancellationToken);
 
         return Ok(new ApiResponse
         {

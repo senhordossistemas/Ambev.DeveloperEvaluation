@@ -1,8 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
-using Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 using AutoMapper;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Mappings;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 
 public class CreateUserRequestProfile : Profile
 {
