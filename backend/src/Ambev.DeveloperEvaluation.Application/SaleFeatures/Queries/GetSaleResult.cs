@@ -1,6 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Dtos;
 
-namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Queries.GetSale;
+namespace Ambev.DeveloperEvaluation.Application.SaleFeatures.Queries;
 
 public sealed record GetSaleResult(
     Guid Id,
