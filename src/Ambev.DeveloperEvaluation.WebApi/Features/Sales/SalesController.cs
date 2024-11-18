@@ -118,7 +118,7 @@ public class SalesController(IMediator mediator, IMapper mapper) : BaseControlle
     public async Task<IActionResult> Cancel([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         await mediator.Send(new CancelSaleCommand(id), cancellationToken);
-        
+
         return Ok(new ApiResponse
         {
             Success = true,
@@ -131,7 +131,7 @@ public class SalesController(IMediator mediator, IMapper mapper) : BaseControlle
         CancellationToken cancellationToken)
     {
         await mediator.Send(new CancelItemCommand(saleId, itemId), cancellationToken);
-        
+
         return Ok(new ApiResponse
         {
             Success = true,

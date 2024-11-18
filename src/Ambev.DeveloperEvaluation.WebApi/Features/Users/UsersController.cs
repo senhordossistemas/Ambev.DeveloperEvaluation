@@ -48,7 +48,7 @@ public class UsersController(IMediator mediator, IMapper mapper) : BaseControlle
             Data = mapper.Map<CreateUserResponse>(response)
         });
     }
-    
+
     [HttpPut("{id:guid}")]
     [ProducesResponseType(typeof(ApiResponseWithData<UpdateUserResult>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
