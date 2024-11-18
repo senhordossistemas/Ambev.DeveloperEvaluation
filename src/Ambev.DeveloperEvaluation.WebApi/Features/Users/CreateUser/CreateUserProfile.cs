@@ -1,4 +1,6 @@
+using Ambev.DeveloperEvaluation.Application.CustomerFeatures;
 using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
+using Ambev.DeveloperEvaluation.WebApi.Features.Customers.CreateCustomer;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
@@ -14,6 +16,8 @@ public class CreateUserProfile : Profile
     public CreateUserProfile()
     {
         CreateMap<CreateUserRequest, CreateUserCommand>();
+        CreateMap<CreateCustomerRequest, CreateCustomerCommand>()
+            .ForMember(dest => dest.UserCommand, opt => opt.MapFrom(src => src.UserRequest));
         CreateMap<CreateUserResult, CreateUserResponse>();
     }
 }

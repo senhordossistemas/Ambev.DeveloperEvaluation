@@ -1,3 +1,5 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Customers.CreateCustomer;
+﻿using Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 
-public sealed record CreateCustomerRequest(string Name, string ExternalId);
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Customers.CreateCustomer;
+
+public sealed record CreateCustomerRequest(CreateUserRequest UserRequest, string Name, string ExternalId);
