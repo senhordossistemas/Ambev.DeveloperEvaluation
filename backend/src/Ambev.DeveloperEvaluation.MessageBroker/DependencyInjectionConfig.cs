@@ -35,6 +35,16 @@ public static class DependencyInjectionConfig
                 j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
             });
 
+            x.AddConsumer<SaleCancelledConsumer>(j =>
+            {
+                j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
+            });
+            
+            x.AddConsumer<SaleItemCancelledConsumer>(j =>
+            {
+                j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
+            });
+
             x.AddConsumer<SaleDeletedConsumer>(j =>
             {
                 j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
@@ -48,6 +58,14 @@ public static class DependencyInjectionConfig
                 {
                     h.Username(queueSettings.Username);
                     h.Password(queueSettings.Password);
+                });
+                
+                cfg.ConfigureJsonSerializerOptions(options =>
+                {
+                    options.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                    options.PropertyNameCaseInsensitive = true;
+
+                    return options;
                 });
 
                 cfg.ConfigureEndpoints(context);

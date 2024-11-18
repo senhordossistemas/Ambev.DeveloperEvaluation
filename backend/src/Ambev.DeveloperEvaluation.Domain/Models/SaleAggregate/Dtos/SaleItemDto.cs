@@ -8,7 +8,7 @@ public sealed record SaleItemDto(
     decimal TotalItemAmount,
     Guid ProductId)
 {
-    public SaleItemDto() : this(default, 0, 0, 0, 0, Guid.Empty)
+    public SaleItemDto() : this(Guid.Empty, 0, 0, 0, 0, Guid.Empty)
     {
     }
 }

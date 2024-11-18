@@ -15,6 +15,7 @@ public class SaleDeletedConsumer : IConsumer<ISaleDeleted>
         catch (Exception ex)
         {
             Console.WriteLine(ex);
+            throw;
         }
     }
 }

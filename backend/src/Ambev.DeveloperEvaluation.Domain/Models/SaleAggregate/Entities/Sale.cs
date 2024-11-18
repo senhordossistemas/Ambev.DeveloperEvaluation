@@ -4,7 +4,6 @@ namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 
 public class Sale : BaseEntity
 {
-    private readonly List<SaleItem> _items = [];
     public string SaleNumber { get; private set; } = string.Empty;
     public decimal TotalAmount { get; private set; }
     public bool IsCancelled { get; private set; }
@@ -12,6 +11,8 @@ public class Sale : BaseEntity
     public Guid? BranchId { get; private set; }
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; private set; }
+    
+    private readonly List<SaleItem> _items = [];
     public IReadOnlyCollection<SaleItem> Items => _items;
 
     public void UpdateSaleDetails(decimal totalAmount, bool isCancelled, Guid? customerId, Guid? branchId)

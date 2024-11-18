@@ -15,7 +15,8 @@ public class SaleCreatedEventHandler(IPublishEndpoint publishEndpoint) : IDomain
             await publishEndpoint.Publish<ISaleCreated>(new
             {
                 Success = true,
-                notification.Sale
+                notification.Sale,
+                Message = ""
             }, cancellationToken);
         }
         catch (Exception ex)
