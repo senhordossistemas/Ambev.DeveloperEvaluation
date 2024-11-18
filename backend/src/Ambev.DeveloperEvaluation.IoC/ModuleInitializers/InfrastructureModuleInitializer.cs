@@ -3,7 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.Models.CartAggregate;
 using Ambev.DeveloperEvaluation.Domain.Models.CustomerAggregate;
 using Ambev.DeveloperEvaluation.Domain.Models.ProductAggregate;
 using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate;
-using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate.Repositories;
+using Ambev.DeveloperEvaluation.Domain.Models.UserAggregate;
 using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.ORM.Repositories;
 using Microsoft.AspNetCore.Builder;

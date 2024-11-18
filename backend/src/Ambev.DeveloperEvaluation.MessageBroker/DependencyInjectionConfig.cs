@@ -1,10 +1,10 @@
-﻿using Ambev.DeveloperEvaluation.MessageBroker.Consumers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Ambev.DeveloperEvaluation.MessageBroker.Consumers;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Ambev.DeveloperEvaluation.MessageBroker;
 
@@ -35,6 +35,16 @@ public static class DependencyInjectionConfig
                 j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
             });
 
+            x.AddConsumer<SaleCancelledConsumer>(j =>
+            {
+                j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
+            });
+            
+            x.AddConsumer<SaleItemCancelledConsumer>(j =>
+            {
+                j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
+            });
+
             x.AddConsumer<SaleDeletedConsumer>(j =>
             {
                 j.UseMessageRetry(r => r.Interval(3, TimeSpan.FromMilliseconds(3000)));
@@ -49,9 +59,16 @@ public static class DependencyInjectionConfig
                     h.Username(queueSettings.Username);
                     h.Password(queueSettings.Password);
                 });
+                
+                cfg.ConfigureJsonSerializerOptions(options =>
+                {
+                    options.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                    options.PropertyNameCaseInsensitive = true;
+
+                    return options;
+                });
 
                 cfg.ConfigureEndpoints(context);
-
             });
         });
     }

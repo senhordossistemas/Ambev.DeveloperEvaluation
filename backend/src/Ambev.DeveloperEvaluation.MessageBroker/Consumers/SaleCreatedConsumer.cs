@@ -9,12 +9,13 @@ public class SaleCreatedConsumer : IConsumer<ISaleCreated>
     {
         try
         {
-            Console.WriteLine("Mensagem recebida no consumidor");
+            Console.WriteLine("Message received at consumer");
             await Task.CompletedTask;
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex);
+            throw;
         }
     }
 }

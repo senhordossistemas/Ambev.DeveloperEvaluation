@@ -85,7 +85,7 @@ public class SalesController(IMediator mediator, IMapper mapper) : BaseControlle
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(ApiResponseWithData<GetSaleResult>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetSaleById([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var response = await mediator.Send(new GetSaleByIdQuery(id), cancellationToken);
 
@@ -100,7 +100,7 @@ public class SalesController(IMediator mediator, IMapper mapper) : BaseControlle
     [HttpGet]
     [ProducesResponseType(typeof(ApiResponseWithData<IEnumerable<GetSaleResult>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetAllSales(CancellationToken cancellationToken)
+    public async Task<IActionResult> Get(CancellationToken cancellationToken)
     {
         var response = await mediator.Send(new GetAllSalesQuery(), cancellationToken);
 

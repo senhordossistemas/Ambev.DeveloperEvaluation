@@ -15,6 +15,12 @@ public interface ISaleRepository
     /// <returns>The created user</returns>
     Task<Sale> CreateAsync(Sale sale, CancellationToken cancellationToken = default);
 
+    /// <summary>
+    ///     Update a sale
+    /// </summary>
+    /// <param name="sale"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<Sale> UpdateAsync(Sale sale, CancellationToken cancellationToken = default);
 
     /// <summary>

@@ -99,6 +99,24 @@ Certifique-se de que os seguintes softwares estejam instalados no seu computador
    - **Swagger UI:** [Swagger UI](https://localhost:60981/swagger/index.html)
    - **RabbitMQ Management:** [RabbitMQ Management:](http://localhost:15672)
 
+3. **Observação:** Não é necessário executar o comando `dotnet ef database update` para criar as tabelas no banco. Há um método responsável por automatizar este processo:
+
+```CSharp
+public static class DatabaseConfig
+{
+    /// <summary>
+    ///     Apply Migrations automatically without needing to run update in the CLI
+    /// </summary>
+    /// <param name="app"></param>
+    public static void ApplyMigrations(this WebApplication app)
+    {
+        var services = app.Services.CreateScope().ServiceProvider;
+        var dataContext = services.GetRequiredService<DefaultContext>();
+        dataContext.Database.Migrate();
+    }
+}
+```
+
 ---
 
 ## **Como Rodar os Testes**

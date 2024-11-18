@@ -3,9 +3,9 @@ using MassTransit;
 
 namespace Ambev.DeveloperEvaluation.MessageBroker.Consumers;
 
-public class SaleUpdatedConsumer : IConsumer<ISaleUpdated>
+public class SaleCancelledConsumer : IConsumer<ISaleCancelled>
 {
-    public async Task Consume(ConsumeContext<ISaleUpdated> context)
+    public async Task Consume(ConsumeContext<ISaleCancelled> context)
     {
         try
         {
