@@ -11,7 +11,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CartsController (IMediator mediator, IMapper mapper) : BaseController
+public class CartsController(IMediator mediator, IMapper mapper) : BaseController
 {
     [HttpPut("create-or-update-item/{userId:guid}")]
     [ProducesResponseType(typeof(ApiResponseWithData<CreateOrUpdateCartResult>), StatusCodes.Status200OK)]
@@ -30,11 +30,12 @@ public class CartsController (IMediator mediator, IMapper mapper) : BaseControll
             Data = response
         });
     }
-    
+
     [HttpDelete("remove-item/{userId:guid}/{productId:guid}")]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete([FromRoute] Guid userId, Guid productId, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete([FromRoute] Guid userId, Guid productId,
+        CancellationToken cancellationToken)
     {
         await mediator.Send(new DeleteCartItemCommand(userId, productId), cancellationToken);
 
@@ -44,7 +45,7 @@ public class CartsController (IMediator mediator, IMapper mapper) : BaseControll
             Message = "Cart deleted successfully"
         });
     }
-    
+
     [HttpGet("get-by-userid/{userId:guid}")]
     [ProducesResponseType(typeof(ApiResponseWithData<GetCartResult>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
