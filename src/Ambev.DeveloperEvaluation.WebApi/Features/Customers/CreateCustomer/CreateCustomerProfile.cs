@@ -7,7 +7,8 @@ public class CreateCustomerProfile : Profile
 {
     public CreateCustomerProfile()
     {
-        CreateMap<CreateCustomerRequest, CreateCustomerCommand>().ReverseMap();
+        CreateMap<CreateCustomerRequest, CreateCustomerCommand>()
+            .ForMember(dest => dest.UserCommand, opt => opt.MapFrom(src => src.UserRequest));
         CreateMap<CreateCustomerResult, CreateCustomerResponse>().ReverseMap();
     }
 }
