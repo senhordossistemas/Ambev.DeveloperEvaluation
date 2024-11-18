@@ -4,7 +4,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Common;
 
 public class BaseEntity : IComparable<BaseEntity>
 {
-    public Guid Id { get; init; }
+    public Guid Id { get; set; }
 
     public int CompareTo(BaseEntity? other)
     {

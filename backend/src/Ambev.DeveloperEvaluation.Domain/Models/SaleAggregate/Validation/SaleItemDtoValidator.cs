@@ -1,11 +1,11 @@
-using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
+using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Dtos;
 using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Validation;
 
-public class SaleItemValidator : AbstractValidator<SaleItem>
+public class SaleItemDtoValidator : AbstractValidator<SaleItemDto>
 {
-    public SaleItemValidator()
+    public SaleItemDtoValidator()
     {
         RuleFor(x => x.ProductId)
             .NotEmpty().WithMessage("Product ID is required");

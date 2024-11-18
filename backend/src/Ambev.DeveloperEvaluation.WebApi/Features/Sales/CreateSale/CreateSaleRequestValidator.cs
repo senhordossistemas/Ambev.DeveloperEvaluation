@@ -12,6 +12,6 @@ public class CreateSaleRequestValidator : AbstractValidator<CreateSaleRequest>
         RuleFor(x => x.Items)
             .NotEmpty().WithMessage("Items cannot be empty")
             .Must(items => items != null && items.Any()).WithMessage("Sale must contain at least one item")
-            .ForEach(item => item.SetValidator(new SaleItemValidator()));
+            .ForEach(item => item.SetValidator(new SaleItemDtoValidator()));
     }
 }

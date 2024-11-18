@@ -114,7 +114,7 @@ public class SalesController(IMediator mediator, IMapper mapper) : BaseControlle
         });
     }
 
-    [HttpPatch("{id:guid}/cancel")]
+    [HttpPatch("cancel/{id:guid}")]
     public async Task<IActionResult> Cancel([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         await mediator.Send(new CancelSaleCommand(id), cancellationToken);
@@ -126,7 +126,7 @@ public class SalesController(IMediator mediator, IMapper mapper) : BaseControlle
         });
     }
 
-    [HttpPatch("{saleId:guid}/items/{itemId:guid}/cancel")]
+    [HttpPatch("cancel-item/{saleId:guid}/{itemId:guid}")]
     public async Task<IActionResult> CancelItem([FromRoute] Guid saleId, [FromRoute] Guid itemId,
         CancellationToken cancellationToken)
     {

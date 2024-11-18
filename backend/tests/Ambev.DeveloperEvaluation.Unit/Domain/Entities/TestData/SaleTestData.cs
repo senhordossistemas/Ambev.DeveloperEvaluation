@@ -1,7 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Models.SaleAggregate.Entities;
 using Bogus;
 
-namespace Ambev.DeveloperEvaluation.Unit.Domain.Entities;
+namespace Ambev.DeveloperEvaluation.Unit.Domain.Entities.TestData;
 
 /// <summary>
 /// Provides methods for generating test data for the Sale entity.
@@ -32,10 +32,20 @@ public static class SaleTestData
     public static Sale GenerateValidSale(int itemCount = 3)
     {
         var sale = SaleFaker.Generate();
+        sale.Id = Guid.NewGuid();
+
         var items = SaleItemFaker.Generate(itemCount);
 
-        foreach (var item in items)
-            sale.AddItem(new SaleItem(item.Quantity, item.UnitPrice, item.ProductId, sale.Id));
+        foreach (var itemToAdd in items.Select(item =>
+                     new SaleItem(item.Quantity, item.UnitPrice, item.ProductId, sale.Id)
+                     {
+                         Id = Guid.NewGuid()
+                     }))
+        {
+            sale.AddItem(itemToAdd);
+        }
+
+        sale.Calculate();
 
         return sale;
     }
